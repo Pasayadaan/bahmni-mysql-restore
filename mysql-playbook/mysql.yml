@@ -1,0 +1,6 @@
+- hosts: bahmni-emr-db
+  sudo: yes
+  roles:
+    - { role: mysql }
+  tags:
+    - bahmni-emr-db
