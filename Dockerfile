@@ -13,7 +13,12 @@ RUN (cd /lib/systemd/system/sysinit.target.wants && for i in *; do [ $i == syste
 VOLUME [ "/sys/fs/cgroup" ]
 
 #This is for Bahmni base CentOS box
-RUN yum -y install hwdata.noarch initscripts.x86_64 iproute.x86_64 iptables.x86_64 iputils.x86_64 libdrm.x86_64 libpciaccess.x86_64 m4.x86_64 policycoreutils.x86_64 selinux-policy.noarch selinux-policy-targeted.noarch sudo sysvinit-tools.x86_64 udev.x86_64 util-linux-ng.x86_64 git ansible 
+RUN yum -y install hwdata.noarch initscripts.x86_64 iproute.x86_64 iptables.x86_64 iputils.x86_64 libdrm.x86_64 libpciaccess.x86_64 m4.x86_64 policycoreutils.x86_64 selinux-policy.noarch selinux-policy-targeted.noarch sudo sysvinit-tools.x86_64 udev.x86_64 util-linux-ng.x86_64 git 
+
+RUN yum -y install mysql-community-common
+RUN yum -y install mysql-community-libs
+RUN yum -y install mysql-community-client
+RUN yum -y install mysql-community-server
 
 RUN yum -y install epel-release
 
@@ -37,4 +42,4 @@ COPY mysql-playbook/mysql.yml /opt/bahmni-installer/bahmni-playbooks/mysql.yml
 RUN ls /opt/bahmni-installer/bahmni-playbooks/mysql.yml
 RUN cd /opt/bahmni-installer/bahmni-playbooks/
 
-RUN ansible-playbook -i local mysql.yml --extra-vars 'implementation_name=default'
+#RUN ansible-playbook -i local mysql.yml --extra-vars 'implementation_name=default'
