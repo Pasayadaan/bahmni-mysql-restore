@@ -19,7 +19,7 @@ RUN yum -y install mysql-community-common
 RUN yum -y install mysql-community-libs
 RUN yum -y install mysql-community-client
 RUN yum -y install mysql-community-server
-
+RUN yum -y install https://www.percona.com/downloads/XtraBackup/Percona-XtraBackup-2.4.5/binary/redhat/6/x86_64/percona-xtrabackup-24-2.4.5-1.el6.x86_64.rpm
 RUN yum -y install epel-release
 
 RUN yum -y install python-pip
