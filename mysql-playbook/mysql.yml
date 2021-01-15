@@ -1,5 +1,10 @@
 - hosts: bahmni-emr-db
   sudo: yes
+  vars:
+    openmrs:
+      path: /data/openmrs/
+      retention_limit: 2
+      restore_path: /data/openmrs/
   roles:
     - { role: mysql-db-restore-incr }
   tags:
