@@ -36,7 +36,7 @@ RUN pip install beautifulsoup4
 
 RUN yum -y install https://dl.bintray.com/bahmni/rpm/rpms/bahmni-installer-0.92-155.noarch.rpm
 
-#RUN yum -y install https://dl.bintray.com/bahmni/rpm/ansible-2.4.6.0-1.el7.ans.noarch.rpm
+RUN yum -y install https://dl.bintray.com/bahmni/rpm/ansible-2.4.6.0-1.el7.ans.noarch.rpm
 COPY mysql-playbook/mysql.yml /opt/bahmni-installer/bahmni-playbooks/mysql.yml
 #RUN ls /opt/bahmni-installer/bahmni-playbooks/mysql.yml
 #RUN cd /opt/bahmni-installer/bahmni-playbooks/
