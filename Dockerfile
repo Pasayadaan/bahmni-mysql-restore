@@ -40,5 +40,5 @@ RUN yum -y install https://dl.bintray.com/bahmni/rpm/ansible-2.4.6.0-1.el7.ans.n
 COPY mysql-playbook/mysql.yml /opt/bahmni-installer/bahmni-playbooks/mysql.yml
 #RUN ls /opt/bahmni-installer/bahmni-playbooks/mysql.yml
 #RUN cd /opt/bahmni-installer/bahmni-playbooks/
-#RUN ansible-playbook -i local mysql.yml --extra-vars 'implementation_name=default'
+RUN ansible-playbook -i local mysql.yml --extra-vars 'implementation_name=default'
 #RUN ansible-playbook -i /opt/bahmni-installer/bahmni-playbooks/local /opt/bahmni-installer/bahmni-playbooks/mysql.yml --extra-vars 'implementation_name=default'
