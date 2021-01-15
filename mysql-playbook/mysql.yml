@@ -1,5 +1,7 @@
 - hosts: bahmni-emr-db
   sudo: yes
+  vars:
+    docker: yes
   roles:
     - { role: mysql }
   tags:
