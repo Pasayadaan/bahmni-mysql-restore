@@ -1,0 +1,16 @@
+- hosts: bahmni-erp-db
+  vars:
+    openerp_db_username: odoo
+    openerp_db_password: password
+  sudo: yes
+  roles:
+    - { role: postgres, postgres_user: odoo }
+    - { role: pg_hba, db_user: "{{openerp_db_username}}", db_name: all, app_server_group: bahmni-erp,
+                      master_db_group: bahmni-erp-db, slave_db_group: bahmni-erp-db-slave}
+  tags:
+    - bahmni-erp-db
+
+- hosts: postgres-backup-tool
+  sudo: yes
+  roles:
+     - {role: pgbackrest-install}
