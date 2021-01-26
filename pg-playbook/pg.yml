@@ -1,5 +1,6 @@
 - hosts: bahmni-erp-db
   vars:
+    docker: yes  
     openerp_db_username: odoo
     openerp_db_password: password
   sudo: yes
