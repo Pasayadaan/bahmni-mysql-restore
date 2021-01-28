@@ -1,0 +1,81 @@
+- hosts: bahmni-lab
+  tasks:
+   - name: Stop bahmni-lab
+     systemd: name="bahmni-lab" state=stopped
+     when: options == 'clinlims'
+     become: yes
+
+- hosts: bahmni-erp
+  tasks:
+   - name: Stop bahmni-erp
+     systemd: name=openerp state=stopped
+     when: options == 'openerp'
+     become: yes
+  ignore_errors: true
+
+- hosts: bahmni-erp
+  tasks:
+   - name: Stop bahmni-erp-connect
+     systemd: name=bahmni-erp-connect state=stopped
+     when: options == 'openerp'
+     become: yes
+  ignore_errors: true
+  
+- hosts: pacs-integration
+  tasks:
+   - name: Stop pacs-integration
+     systemd: name=pacs-integration state=stopped
+     when: options == 'pacsdb'
+     become: yes
+
+- hosts: dcm4chee
+  tasks:
+   - name: Stop dcm4chee
+     systemd: name=dcm4chee state=stopped
+     when: options == 'bahmni_pacs'
+     become: yes
+
+- name: Restoring db via pgbackrest
+  hosts: postgres-backup-tool
+  sudo: yes
+  roles:
+    - { role: httpd-maintenance, maintenance_status: start}
+    - { role: pgbackrest-restore, when: options == 'postgres' or options == 'openerp'  or options == 'clinlims' or options == 'dcm4chee-db' or options == 'pacs-integration-db'}
+    - { role: httpd-maintenance, maintenance_status: end}
+
+- hosts: bahmni-lab
+  tasks:
+   - name: Start bahmni-lab
+     systemd: name=bahmni-lab state=started
+     when: options == 'clinlims'
+     become: yes
+
+- hosts: bahmni-erp
+  tasks:
+   - name: Start openerp
+     systemd: name=openerp state=started
+     when: options == 'openerp'
+     become: yes
+  ignore_errors: true
+  
+- hosts: bahmni-erp
+  tasks:
+   - name: Start bahmni-erp
+     systemd: name=bahmni-erp-connect state=started
+     when: options == 'openerp'
+     become: yes
+  ignore_errors: true
+  
+- hosts: pacs-integration
+  tasks:
+   - name: Start pacs-integration
+     systemd: name=pacs-integration state=started
+     when: options == 'pacsdb'
+     become: yes
+
+- hosts: dcm4chee
+  tasks:
+   - name: Start dcm4chee
+     systemd: name=dcm4chee state=started
+     when: options == 'bahmni_pacs'
+     become: yes
