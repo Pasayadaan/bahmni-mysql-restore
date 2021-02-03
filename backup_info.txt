@@ -1,0 +1,4 @@
+Timestamp	Starategy	Backup_ID	Parent_ID
+20210202191309 	 full 	 20210202-191309F 	
+20210203154127 	 full 	 20210203-154127F 	
+	 	 	
